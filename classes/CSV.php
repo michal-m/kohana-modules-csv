@@ -200,9 +200,9 @@ class CSV implements ArrayAccess
         $enclosure = ($enclosure === NULL) ? $this->_enclosure : $enclosure;
         $escape = ($escape === NULL) ? $this->_escape : $escape;
 
-        $output = '';
+        $output = CSV_Writer::write($this->_data, $delimiter, $enclosure, $escape);
 
-        // @TODO: prepare data for output
+        // @TODO: error reporting when writing
 
         return $output;
     }

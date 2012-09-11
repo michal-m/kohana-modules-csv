@@ -9,5 +9,21 @@
  */
 class CSV_Writer
 {
+    /**
+     * Converts an array to a formatted CSV string
+     *
+     * @param array $data
+     * @param string $delimiter
+     * @param string $enclosure
+     * @param string $escape
+     * @return string Returns a formatted CSV string
+     */
+    public static function write(array $data, $delimiter = ",", $enclosure ="\"", $escape = "\\")
+    {
+        $output = '';
 
+        // @TODO: write
+
+        return $output;
+    }
 }
