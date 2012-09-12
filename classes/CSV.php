@@ -248,9 +248,9 @@ class CSV implements ArrayAccess
             $this->_output_enclosure = $enclosure;
             $this->_output_escape = $escape;
 
-            $output = '';
+            $output = CSV_Writer::write($this->_data, $delimiter, $enclosure, $escape);
 
-            // @TODO: prepare data for output
+            // @TODO: error reporting when writing
 
             $this->_output_cache = $output;
             $this->_changed = FALSE;
