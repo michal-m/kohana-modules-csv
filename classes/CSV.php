@@ -92,7 +92,7 @@ class CSV implements ArrayAccess
         }
         else
         {
-            $this->_data[$offset] = $value;
+            $this->_data[$offset] = (is_scalar($value)) ? (string) $value : $value;
         }
     }
 
