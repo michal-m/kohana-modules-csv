@@ -22,7 +22,15 @@ class CSV_Writer
     {
         $output = '';
 
-        // @TODO: write
+        foreach ($data as $row)
+        {
+            foreach ($row as $column => $cell)
+            {
+                
+            }
+
+            $output .= "\n";
+        }
 
         return $output;
     }
