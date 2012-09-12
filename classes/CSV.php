@@ -214,7 +214,7 @@ class CSV implements ArrayAccess
      * @param string $delimiter
      * @param string $enclosure
      * @param string $escape
-     * @param bool $bom Whether to include Byte Order Mark in the file
+     * @param bool $bom Whether to include UTF-8 Byte Order Mark in the file
      */
     public function to_file($filename, $delimiter = NULL, $enclosure = NULL, $escape = NULL, $bom = TRUE)
     {
