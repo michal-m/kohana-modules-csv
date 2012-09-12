@@ -32,7 +32,32 @@ class CSV implements ArrayAccess
     /**
      * @var bool
      */
+    protected $_changed = TRUE;
+
+    /**
+     * @var bool
+     */
     protected $_loaded = FALSE;
+
+    /**
+     * @var string
+     */
+    protected $_output_cache = '';
+
+    /**
+     * @var string
+     */
+    protected $_output_delimiter;
+
+    /**
+     * @var string
+     */
+    protected $_output_enclosure;
+
+    /**
+     * @var string
+     */
+    protected $_output_escape;
 
     /**
      * @param string $delimiter
@@ -94,6 +119,8 @@ class CSV implements ArrayAccess
         {
             $this->_data[$offset] = (is_scalar($value)) ? (string) $value : $value;
         }
+
+        $this->_changed = TRUE;
     }
 
     /**
@@ -104,6 +131,7 @@ class CSV implements ArrayAccess
     public function offsetUnset($offset)
     {
         unset($this->_data[$offset]);
+        $this->_changed = TRUE;
     }
 
     /**
@@ -146,6 +174,7 @@ class CSV implements ArrayAccess
             }
 
             $this->_data = $data;
+            $this->_changed = TRUE;
             $this->_loaded = TRUE;
         }
         else
@@ -164,6 +193,7 @@ class CSV implements ArrayAccess
     {
         // @TODO: data parser
 
+        $this->_changed = TRUE;
         $this->_loaded = TRUE;
         return TRUE;
     }
@@ -200,11 +230,21 @@ class CSV implements ArrayAccess
         $enclosure = ($enclosure === NULL) ? $this->_enclosure : $enclosure;
         $escape = ($escape === NULL) ? $this->_escape : $escape;
 
-        $output = '';
+        if ($this->_changed OR $delimiter !== $this->_output_delimiter OR $enclosure !== $this->_output_enclosure OR $escape !== $this->_output_escape)
+        {
+            $this->_output_delimiter = $delimiter;
+            $this->_output_enclosure = $enclosure;
+            $this->_output_escape = $escape;
+            
+            $output = '';
 
-        // @TODO: prepare data for output
+            // @TODO: prepare data for output
 
-        return $output;
+            $this->_output_cache = $output;
+            $this->_changed = FALSE;
+        }
+
+        return $this->_output_cache;
     }
 
     /**
