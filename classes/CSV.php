@@ -214,12 +214,15 @@ class CSV implements ArrayAccess
      * @param string $delimiter
      * @param string $enclosure
      * @param string $escape
+     * @param bool $bom Whether to include Byte Order Mark in the file
      */
-    public function to_file($filename, $delimiter = NULL, $enclosure = NULL, $escape = NULL)
+    public function to_file($filename, $delimiter = NULL, $enclosure = NULL, $escape = NULL, $bom = TRUE)
     {
+        $bom = ($bom) ? "\xEF\xBB\xBF" : '';
+
         if (is_writable($filename))
         {
-            $success = file_put_contents($filename, $this->output($delimiter, $enclosure, $escape));
+            $success = file_put_contents($filename, $bom . $this->output($delimiter, $enclosure, $escape));
 
             if ( ! $success)
             {
