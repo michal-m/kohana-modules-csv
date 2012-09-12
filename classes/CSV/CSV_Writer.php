@@ -26,6 +26,11 @@ class CSV_Writer
         {
             foreach ($row as $column => $cell)
             {
+                if ( ! is_scalar($cell))
+                {
+                    $cell = (string) $cell;
+                }
+
                 // Escape enclosure
                 if (strpos($cell, $enclosure) !== FALSE)
                 {
