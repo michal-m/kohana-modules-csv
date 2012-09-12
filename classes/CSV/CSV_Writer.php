@@ -26,7 +26,20 @@ class CSV_Writer
         {
             foreach ($row as $column => $cell)
             {
-                
+                // Escape enclosure
+                if (strpos($cell, $enclosure) !== FALSE)
+                {
+                    $cell = str_replace($enclosure, $enclosure . $enclosure, $cell);
+                    $enclose_cell = TRUE;
+                }
+
+                // Enclose cell
+                if ($enclose_cell OR strpos($cell, $delimiter) !== FALSE OR preg_match("/(^\s|\s$|\n|\r)/", $cell))
+                {
+                    $cell = $enclosure . $cell . $enclosure;
+                }
+
+                $output .= $cell . $delimiter;
             }
 
             $output .= "\n";
