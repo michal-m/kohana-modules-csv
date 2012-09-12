@@ -66,6 +66,11 @@ class CSV implements ArrayAccess
      */
     public function __construct($delimiter = ",", $enclosure = "\"", $escape = "\\")
     {
+        if (count(array_unique(func_get_args())) !== 3)
+        {
+            // @TODO: error
+        }
+
         $this->_delimiter = $delimiter;
         $this->_enclosure = $enclosure;
         $this->_escape = $escape;
@@ -230,12 +235,19 @@ class CSV implements ArrayAccess
         $enclosure = ($enclosure === NULL) ? $this->_enclosure : $enclosure;
         $escape = ($escape === NULL) ? $this->_escape : $escape;
 
+        $format_args = array($delimiter, $enclosure, $escape);
+
+        if (count(array_unique($format_args)) !== 3)
+        {
+            // @TODO: error
+        }
+
         if ($this->_changed OR $delimiter !== $this->_output_delimiter OR $enclosure !== $this->_output_enclosure OR $escape !== $this->_output_escape)
         {
             $this->_output_delimiter = $delimiter;
             $this->_output_enclosure = $enclosure;
             $this->_output_escape = $escape;
-            
+
             $output = '';
 
             // @TODO: prepare data for output
