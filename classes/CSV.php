@@ -1,14 +1,13 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-
 /**
  * The CSV class
  *
  * @package     CSV
  * @author      Michał Musiał
- * @copyright   (c) 2012 Michał Musiał
+ * @copyright   (c) 2013 Michał Musiał
  */
-class CSV implements ArrayAccess
-{
+class CSV implements ArrayAccess {
+
     /**
      * @var string
      */
@@ -60,9 +59,9 @@ class CSV implements ArrayAccess
     protected $_output_escape;
 
     /**
-     * @param string $delimiter
-     * @param string $enclosure
-     * @param string $escape
+     * @param   string  $delimiter
+     * @param   string  $enclosure
+     * @param   string  $escape
      */
     public function __construct($delimiter = ",", $enclosure = "\"", $escape = "\\")
     {
@@ -79,7 +78,7 @@ class CSV implements ArrayAccess
     }
 
     /**
-     * @return string
+     * @return  string
      */
     public function __toString()
     {
@@ -89,8 +88,8 @@ class CSV implements ArrayAccess
     /**
      * Whether a offset exists
      *
-     * @param mixed $offset
-     * @return bool
+     * @param   mixed   $offset
+     * @return  bool
      */
     public function offsetExists($offset)
     {
@@ -100,8 +99,8 @@ class CSV implements ArrayAccess
     /**
      * Offset to retrieve
      *
-     * @param mixed $offset
-     * @return mixed
+     * @param   mixed   $offset
+     * @return  mixed
      */
     public function offsetGet($offset)
     {
@@ -111,8 +110,8 @@ class CSV implements ArrayAccess
     /**
      * Offset to set
      *
-     * @param mixed $offset
-     * @param mixed $value
+     * @param   mixed   $offset
+     * @param   mixed   $value
      */
     public function offsetSet($offset, $value)
     {
@@ -131,7 +130,7 @@ class CSV implements ArrayAccess
     /**
      * Offset to unset
      *
-     * @param mixed $offset
+     * @param   mixed   $offset
      */
     public function offsetUnset($offset)
     {
@@ -143,15 +142,13 @@ class CSV implements ArrayAccess
      * Returns data in original format or sets it from parameter. If an array is
      * more than 2-dimentional 3rd dimention is converted to a string
      *
-     * @param array $data
-     * @return type
+     * @param   array   $data
+     * @return  type
      */
     public function data($data = NULL)
     {
         if ($data === NULL)
-        {
             return $this->_data;
-        }
 
         if ($this->_loaded)
         {
@@ -191,8 +188,8 @@ class CSV implements ArrayAccess
     /**
      * Loads data from a string
      *
-     * @param string $data
-     * @return bool @TODO
+     * @param   string  $data
+     * @return  bool    @TODO
      */
     public function load($data)
     {
@@ -206,8 +203,8 @@ class CSV implements ArrayAccess
     /**
      * Loads data from a file
      *
-     * @param string $filename
-     * @return bool @TODO
+     * @param   string  $filename
+     * @return  bool    @TODO
      */
     public function load_file($filename)
     {
@@ -224,10 +221,10 @@ class CSV implements ArrayAccess
     /**
      * Outputs data in a CSV format.
      *
-     * @param string $delimiter
-     * @param string $enclosure
-     * @param string $escape
-     * @return string Returns a CSV formatted string.
+     * @param   string  $delimiter
+     * @param   string  $enclosure
+     * @param   string  $escape
+     * @return  string  Returns a CSV formatted string.
      */
     public function output($delimiter = NULL, $enclosure = NULL, $escape = NULL)
     {
@@ -262,11 +259,11 @@ class CSV implements ArrayAccess
     /**
      * Saves (and generates if necessary) output to a file.
      *
-     * @param string $filename
-     * @param string $delimiter
-     * @param string $enclosure
-     * @param string $escape
-     * @param bool $bom Whether to include UTF-8 Byte Order Mark in the file
+     * @param   string  $filename
+     * @param   string  $delimiter
+     * @param   string  $enclosure
+     * @param   string  $escape
+     * @param   bool    $bom        Whether to include UTF-8 Byte Order Mark in the file
      */
     public function to_file($filename, $delimiter = NULL, $enclosure = NULL, $escape = NULL, $bom = TRUE)
     {
